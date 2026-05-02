@@ -1,0 +1,31 @@
+{
+  "name": "magi",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "mcp": "node mcp-server.js",
+    "rss:check": "tsx scripts/check-rss.ts"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "^5.2.12",
+    "@sveltejs/kit": "^2.24.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "svelte": "^5.22.5",
+    "svelte-check": "^4.1.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.41.0",
+    "@modelcontextprotocol/sdk": "^1.10.0",
+    "rss-parser": "^3.13.0",
+    "sveltekit-sse": "^0.14.3"
+  }
+}

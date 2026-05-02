@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(gh api repos/TomaszRewak/MAGI --jq '.description, .language, .topics, .default_branch')",
+      "Bash(gh api repos/TomaszRewak/MAGI/git/trees/master?recursive=1 --jq '.tree[] | .path')",
+      "Bash(gh api \"repos/TomaszRewak/MAGI/git/trees/master?recursive=1\" --jq '.tree[] | .path')",
+      "Bash(gh api repos/TomaszRewak/MAGI/contents/ai.py --jq '.content')",
+      "Bash(gh api repos/TomaszRewak/MAGI/contents/main.py --jq '.content')",
+      "Bash(gh api repos/TomaszRewak/MAGI/contents/requirements.txt --jq '.content')",
+      "Bash(gh api repos/TomaszRewak/MAGI/contents/components/magi.js --jq '.content')",
+      "Bash(gh api repos/TomaszRewak/MAGI/contents/components/wise_man.js --jq '.content')",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__bc5d8d8d-beea-40c2-87de-c8b91bb91ee3__resolve-library-id",
+      "mcp__bc5d8d8d-beea-40c2-87de-c8b91bb91ee3__query-docs",
+      "WebSearch",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(npm run check)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(find /Users/chris/Sites/magi/src -type f \\\\\\(-name *.ts -o -name *.js \\\\\\))",
+      "Bash(xargs ls:*)",
+      "Bash(find /Users/chris/Sites/magi/src/routes -type f -name *.ts -o -name *.svelte)",
+      "Bash(find /Users/chris/Sites/magi/src -name +*.ts -o -name +*.svelte)",
+      "Bash(npm install:*)",
+      "Bash(curl -s -X POST http://localhost:5173/api/push -H 'Content-Type: application/json' -d '{\"\"\"\"question\"\"\"\":\"\"\"\"test question\"\"\"\"}')",
+      "Bash(curl -s -X POST http://localhost:5173/api/push -H 'Content-Type: application/json' -d '{\"\"question\"\":\"\"test question\"\"}')",
+      "Bash(echo \"exit: $?\")",
+      "Bash(curl -s -X POST http://localhost:5174/api/push -H 'Content-Type: application/json' -d '{\"\"question\"\":\"\"test push\"\"}')",
+      "Bash(curl -s -X POST http://localhost:5174/api/push -H 'Content-Type: application/json' -d '{\"\"question\"\":\"\"test subscriber count\"\"}')",
+      "Bash(curl -s -X POST http://localhost:5174/api/push -H 'Content-Type: application/json' -d '{\"\"question\"\":\"\"Should we deploy to production on a Friday afternoon?\"\"}')"
+    ]
+  }
+}

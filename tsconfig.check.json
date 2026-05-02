@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "src/types-shim.d.ts",
+    "src/lib/types.ts",
+    "src/lib/server/agents.ts",
+    "src/lib/server/pipeline/briefing.ts",
+    "src/lib/db/client.ts",
+    "src/lib/ingest/normalize.ts",
+    "src/lib/ingest/queue.ts",
+    "src/lib/ingest/connectors/index.ts",
+    "src/lib/ingest/connectors/rss.ts",
+    "src/lib/enrich/sentiment.ts",
+    "src/lib/enrich/embed.ts",
+    "src/lib/enrich/ner.ts",
+    "src/lib/enrich/topics.ts",
+    "src/lib/trends/detect.ts",
+    "src/lib/trends/cluster.ts",
+    "src/lib/retrieval/hybrid.ts",
+    "src/lib/retrieval/rerank.ts",
+    "scripts/check-rss.ts"
+  ]
+}

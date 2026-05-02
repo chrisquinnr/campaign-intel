@@ -1,0 +1,18 @@
+{
+	"/": [],
+	"/api/ask": [
+		"src/routes/api/ask/+server.ts"
+	],
+	"/api/execute": [
+		"src/routes/api/execute/+server.ts"
+	],
+	"/api/live": [
+		"src/routes/api/live/+server.ts"
+	],
+	"/api/push": [
+		"src/routes/api/push/+server.ts"
+	],
+	"/api/query": [
+		"src/routes/api/query/+server.ts"
+	]
+}

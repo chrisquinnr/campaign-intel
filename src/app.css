@@ -1,0 +1,114 @@
+:root {
+  --nerv-orange: #ff8d00;
+  --nerv-black: #000000;
+  --nerv-stripe: #140b02;
+  --nerv-input-bg: #1f1203;
+  --nerv-green: #52e691;
+  --nerv-red: #a41413;
+  --nerv-blue: #3caee0;
+  --nerv-header-green: #277547;
+  --nerv-conditional: repeating-linear-gradient(56deg, #52e691 0px, #52e691 30px, #82cd68 30px, #82cd68 60px);
+  --font-display: 'Orbitron', 'Eurostile', 'Bank Gothic', 'Rajdhani', sans-serif;
+  --font-body: 'Share Tech Mono', 'IBM Plex Mono', monospace;
+}
+
+@keyframes flicker-animation {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    background: #000;
+    color: #000;
+    border-color: #000;
+    filter: brightness(0.6);
+  }
+}
+
+@keyframes pulse-link {
+  0%,
+  100% {
+    opacity: 0.35;
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px var(--nerv-orange);
+  }
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    linear-gradient(145deg, rgba(255, 141, 0, 0.06), transparent 45%),
+    repeating-linear-gradient(
+      -42deg,
+      var(--nerv-black) 0px,
+      var(--nerv-black) 17px,
+      var(--nerv-stripe) 17px,
+      var(--nerv-stripe) 34px
+    );
+  color: var(--nerv-orange);
+  font-family: var(--font-body);
+}
+
+body {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.flicker {
+  animation: flicker-animation 0.25s infinite step-end;
+}
+
+.app-shell {
+  width: min(1200px, 96vw);
+  max-width: 900px;
+  margin: 1.2rem auto 2rem;
+  padding: 1rem;
+  border: 2px solid var(--nerv-orange);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(0.5px);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.section-rule {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--nerv-header-green), transparent);
+  margin: 0.35rem 0 0.6rem;
+}
+
+.terminal-box {
+  border: 1px solid var(--nerv-orange);
+  background: rgba(12, 6, 1, 0.82);
+}
+
+button,
+input,
+textarea {
+  font-family: var(--font-body);
+}
