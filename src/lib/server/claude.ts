@@ -1,6 +1,8 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { dev } from '$app/environment';
-import { ANTHROPIC_API_KEY, ANTHROPIC_MODEL } from '$env/static/private';
+
+const dev = process.env.NODE_ENV !== 'production';
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL;
 
 const DEFAULT_MODELS = [
   'claude-sonnet-4-6',
@@ -10,7 +12,10 @@ function buildClient(): Anthropic | null {
   if (!ANTHROPIC_API_KEY) {
     return null;
   }
-  return new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+  // maxRetries=4 (default 2). The SDK already honours retry-after on 429s
+  // and exponentially backs off on 5xx; we extend the budget so bursts
+  // that slip past in-process rate limiters still self-heal.
+  return new Anthropic({ apiKey: ANTHROPIC_API_KEY, maxRetries: 4 });
 }
 
 function extractAnthropicMessage(error: unknown): string {
@@ -43,14 +48,17 @@ export async function callClaudeText(args: {
   prompt: string;
   maxTokens?: number;
   temperature?: number;
+  /** Optional model override. When set, skips the env+default fallback chain. */
+  model?: string;
 }): Promise<string> {
   const client = buildClient();
   if (!client) {
     return `MOCK RESPONSE (missing ANTHROPIC_API_KEY): ${args.prompt.slice(0, 120)}...`;
   }
 
+  const candidates = args.model ? [args.model] : modelCandidates();
   let lastError: unknown = null;
-  for (const model of modelCandidates()) {
+  for (const model of candidates) {
     try {
       const response = await client.messages.create({
         model,

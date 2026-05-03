@@ -19,8 +19,11 @@
   "include": [
     "src/types-shim.d.ts",
     "src/lib/types.ts",
+    "src/lib/util/rate-limit.ts",
     "src/lib/server/agents.ts",
+    "src/lib/server/claude.ts",
     "src/lib/server/pipeline/briefing.ts",
+    "src/lib/server/pipeline/persist.ts",
     "src/lib/db/client.ts",
     "src/lib/db/database.types.ts",
     "src/lib/ingest/normalize.ts",
@@ -28,6 +31,7 @@
     "src/lib/ingest/connectors/index.ts",
     "src/lib/ingest/connectors/rss.ts",
     "src/lib/ingest/worker.ts",
+    "src/lib/enrich/sentiment-parser.ts",
     "src/lib/enrich/sentiment.ts",
     "src/lib/enrich/embed.ts",
     "src/lib/enrich/ner.ts",
@@ -39,6 +43,8 @@
     "src/lib/retrieval/rerank.ts",
     "scripts/check-rss.ts",
     "scripts/ingest-once.ts",
-    "scripts/enrich-once.ts"
+    "scripts/enrich-once.ts",
+    "scripts/query.ts",
+    "scripts/briefing-run.ts"
   ]
 }

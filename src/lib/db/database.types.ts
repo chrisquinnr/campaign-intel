@@ -397,6 +397,29 @@ export type Database = {
     }
     Views: { [_ in never]: never }
     Functions: {
+      hybrid_search: {
+        Args: {
+          match_count?: number
+          published_after?: string
+          published_before?: string
+          q_embedding?: string
+          q_text?: string
+          source_ids?: string[]
+          topic_filter?: string[]
+        }
+        Returns: {
+          bm25_score: number
+          fused_score: number
+          id: string
+          lang: string
+          published_at: string
+          source_id: string
+          text: string
+          title: string
+          url: string
+          vector_score: number
+        }[]
+      }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
     }
