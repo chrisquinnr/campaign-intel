@@ -8,7 +8,9 @@
 --   * RLS is enabled on every table; policies are added in 0002_rls.sql once
 --     auth roles are wired up. Service role bypasses for ingest workers.
 
-create extension if not exists "uuid-ossp";
+-- Supabase pre-installs uuid-ossp and pgcrypto in the `extensions` schema.
+-- We use gen_random_uuid() from pgcrypto for ids. pgvector and pg_trgm need
+-- explicit creation.
 create extension if not exists "vector";
 create extension if not exists "pg_trgm";
 
@@ -40,7 +42,7 @@ on conflict (slug) do nothing;
 create type source_kind as enum ('rss', 'gdelt', 'newsapi', 'bluesky', 'mastodon', 'reddit');
 
 create table if not exists sources (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   kind            source_kind not null,
   label           text not null,
   endpoint        text not null,
@@ -62,7 +64,7 @@ create index if not exists sources_active_idx on sources (active) where active;
 -- hybrid retrieval is one join away.
 -- ─────────────────────────────────────────────────────────────
 create table if not exists documents (
-  id            uuid primary key default uuid_generate_v4(),
+  id            uuid primary key default gen_random_uuid(),
   source_id     uuid not null references sources(id) on delete cascade,
   external_id   text not null,
   url           text,
@@ -131,7 +133,7 @@ create type run_kind as enum ('briefing', 'query', 'trend_detect');
 create type run_status as enum ('pending', 'running', 'completed', 'failed');
 
 create table if not exists runs (
-  id            uuid primary key default uuid_generate_v4(),
+  id            uuid primary key default gen_random_uuid(),
   kind          run_kind not null,
   status        run_status not null default 'pending',
   input         jsonb,                        -- query text / window / topic
@@ -151,7 +153,7 @@ create index if not exists runs_kind_started_idx on runs (kind, started_at desc)
 create type trend_kind as enum ('volume_spike', 'sentiment_shift', 'narrative_emergence', 'entity_cooccurrence');
 
 create table if not exists trends (
-  id            uuid primary key default uuid_generate_v4(),
+  id            uuid primary key default gen_random_uuid(),
   kind          trend_kind not null,
   scope         jsonb not null,               -- { topic?, entity?, clusterId? }
   window_start  timestamptz not null,
@@ -174,7 +176,7 @@ create type briefing_cadence  as enum ('daily', 'weekly', 'ad_hoc');
 create type conscience_verdict as enum ('approved', 'revise', 'block');
 
 create table if not exists briefings (
-  id                  uuid primary key default uuid_generate_v4(),
+  id                  uuid primary key default gen_random_uuid(),
   audience            briefing_audience not null,
   cadence             briefing_cadence not null,
   topic               text references taxonomy_topics(slug) on delete set null,
@@ -205,7 +207,7 @@ create index if not exists briefings_audience_idx        on briefings (audience,
 create type delivery_channel as enum ('email', 'slack', 'in_app');
 
 create table if not exists briefing_subscriptions (
-  id           uuid primary key default uuid_generate_v4(),
+  id           uuid primary key default gen_random_uuid(),
   user_id      uuid not null,                 -- auth.users.id
   audience     briefing_audience not null,
   cadence      briefing_cadence not null,

@@ -22,18 +22,23 @@
     "src/lib/server/agents.ts",
     "src/lib/server/pipeline/briefing.ts",
     "src/lib/db/client.ts",
+    "src/lib/db/database.types.ts",
     "src/lib/ingest/normalize.ts",
     "src/lib/ingest/queue.ts",
     "src/lib/ingest/connectors/index.ts",
     "src/lib/ingest/connectors/rss.ts",
+    "src/lib/ingest/worker.ts",
     "src/lib/enrich/sentiment.ts",
     "src/lib/enrich/embed.ts",
     "src/lib/enrich/ner.ts",
     "src/lib/enrich/topics.ts",
+    "src/lib/enrich/worker.ts",
     "src/lib/trends/detect.ts",
     "src/lib/trends/cluster.ts",
     "src/lib/retrieval/hybrid.ts",
     "src/lib/retrieval/rerank.ts",
-    "scripts/check-rss.ts"
+    "scripts/check-rss.ts",
+    "scripts/ingest-once.ts",
+    "scripts/enrich-once.ts"
   ]
 }
